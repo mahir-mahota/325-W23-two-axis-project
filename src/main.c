@@ -62,7 +62,7 @@
   * @{
   */
 
-//#define MICROSTEPPING_MOTOR_EXAMPLE        //!< Uncomment to performe the standalone example
+#define MICROSTEPPING_MOTOR_EXAMPLE        //!< Uncomment to performe the standalone example
 #define MICROSTEPPING_MOTOR_USART_EXAMPLE  //!< Uncomment to performe the USART example
 #if ((defined (MICROSTEPPING_MOTOR_EXAMPLE)) && (defined (MICROSTEPPING_MOTOR_USART_EXAMPLE)))
   #error "Please select an option only!"
@@ -106,20 +106,29 @@ int main(void)
 	
 	/*Initialize the motor parameters */
 	Motor_Param_Reg_Init();
+  
+  GPIO_InitTypeDef GPIO_Switch;
+  GPIO_Switch.Pin = GPIO_PIN_0;
+  GPIO_Switch.Mode = GPIO_MODE_INPUT;
+  GPIO_Switch.Pull = GPIO_PULLUP;
+  GPIO_Switch.Speed = GPIO_SPEED_FAST;
+  HAL_GPIO_Init(GPIOA, &GPIO_Switch);
 
-  GPIO_InitTypeDef GPIO_InitStruct;
-  GPIO_InitStruct.Pin = GPIO_PIN_0;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  GPIO_InitTypeDef GPIO_LED;
+  GPIO_LED.Pin = GPIO_PIN_0;
+  GPIO_LED.Mode = GPIO_MODE_OUTPUT_OD;
+  GPIO_LED.Pull = GPIO_PULLUP;
+  GPIO_LED.Speed = GPIO_SPEED_FAST;
+  HAL_GPIO_Init(GPIOB, &GPIO_LED);
   
   /* Infinite loop */
   while (1)
   {
+    
     /* Check if any Application Command for L6470 has been entered by USART */
     USART_CheckAppCmd();
-    USART_Transmit(&huart2, (char *)HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0));
+    volatile GPIO_PinState pin_val = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0);
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, !pin_val);
   }
 #endif
 }
