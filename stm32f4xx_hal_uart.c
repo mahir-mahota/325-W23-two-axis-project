@@ -3214,18 +3214,7 @@ HAL_StatusTypeDef UART_Start_Receive_IT(UART_HandleTypeDef *huart, uint8_t *pDat
   huart->ErrorCode = HAL_UART_ERROR_NONE;
   huart->RxState = HAL_UART_STATE_BUSY_RX;
 
-//new code
-  if(huart->gState == HAL_UART_STATE_BUSY_TX)
-  {
-    huart->gState = HAL_UART_STATE_BUSY_TX_RX;
-  }
-  else
-  {
-    huart->gState = HAL_UART_STATE_BUSY_RX;
-  }
-//end added code
-
- /* Process Unlocked */
+  /* Process Unlocked */
   __HAL_UNLOCK(huart);
 
   /* Enable the UART Parity Error Interrupt */
@@ -3236,9 +3225,6 @@ HAL_StatusTypeDef UART_Start_Receive_IT(UART_HandleTypeDef *huart, uint8_t *pDat
 
   /* Enable the UART Data Register not empty Interrupt */
   __HAL_UART_ENABLE_IT(huart, UART_IT_RXNE);
-
-
- 
 
   return HAL_OK;
 }
