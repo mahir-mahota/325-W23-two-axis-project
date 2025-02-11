@@ -34,6 +34,7 @@
 
 #include "example.h"
 #include "example_usart.h"
+#include "config.h"
 
 /**
   * @defgroup   MotionControl
@@ -84,6 +85,9 @@ int main(void)
   
   /* X-NUCLEO-IHM02A1 initialization */
   BSP_Init();
+
+  /* Limit switch initialization */
+  LS_Init();
   
 #ifdef NUCLEO_USE_USART
   /* Transmit the initial message to the PC via UART */
@@ -112,6 +116,7 @@ int main(void)
   {
     /* Check if any Application Command for L6470 has been entered by USART */
     USART_CheckAppCmd();
+    // ...
   }
 #endif
 }

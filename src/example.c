@@ -36,6 +36,7 @@
 #include "example_usart.h"
 #include "params.h"
 #include "xnucleoihm02a1.h"
+#include "config.h"
 
 /**
   * @addtogroup MicrosteppingMotor_Example
@@ -271,15 +272,27 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   switch (GPIO_Pin)
   {
-  case GPIO_PIN_13:
-    BSP_EmergencyStop();
-    break;
-  case L6470_nBUSY_SYNC_GPIO_PIN:
-    BSP_L6470_BusySynchEventManager();
-    break;
-  case L6470_nFLAG_GPIO_PIN:
-    BSP_L6470_FlagEventManager();
-    break;
+    // System cases
+    case GPIO_PIN_13:
+      BSP_EmergencyStop();
+      break;
+    case L6470_nBUSY_SYNC_GPIO_PIN:
+      BSP_L6470_BusySynchEventManager();
+      break;
+    case L6470_nFLAG_GPIO_PIN:
+      BSP_L6470_FlagEventManager();
+      break;
+    // Limit switch cases
+    case GPIO_PIN_6:
+    case GPIO_PIN_7:
+      // x-axis motor
+      L6470_HardStop(X_AXIS_MOTOR_ID);
+      break;
+    case GPIO_PIN_8:
+    case GPIO_PIN_9:
+      // y-axis motor
+      L6470_HardStop(Y_AXIS_MOTOR_ID);
+      break;
   }
 }
 
