@@ -59,8 +59,8 @@
   * @{
   */
 
-//#define MICROSTEPPING_MOTOR_EXAMPLE        //!< Uncomment to perform the standalone example
-#define MICROSTEPPING_MOTOR_USART_EXAMPLE  //!< Uncomment to perform the USART example
+#define MICROSTEPPING_MOTOR_EXAMPLE        //!< Uncomment to perform the standalone example
+// #define MICROSTEPPING_MOTOR_USART_EXAMPLE  //!< Uncomment to perform the USART example
 #if ((defined (MICROSTEPPING_MOTOR_EXAMPLE)) && (defined (MICROSTEPPING_MOTOR_USART_EXAMPLE)))
   #error "Please select an option only!"
 #elif ((!defined (MICROSTEPPING_MOTOR_EXAMPLE)) && (!defined (MICROSTEPPING_MOTOR_USART_EXAMPLE)))
@@ -88,7 +88,7 @@ int main(void)
 #ifdef NUCLEO_USE_USART
   /* Transmit the initial message to the PC via UART */
   USART_TxWelcomeMessage();
-  	USART_Transmit(&huart2, " X-CUBE-SPN2 v1.0.0\n\r");
+  USART_Transmit(&huart2, " X-CUBE-SPN2 v1.0.0\n\r");
 #endif
   
 #if defined (MICROSTEPPING_MOTOR_EXAMPLE)
@@ -96,7 +96,10 @@ int main(void)
   MicrosteppingMotor_Example_01();
   
   /* Infinite loop */
-  while (1);
+  while (1) {
+    // Write code here
+  };
+
 #elif defined (MICROSTEPPING_MOTOR_USART_EXAMPLE)
   /* Fill the L6470_DaisyChainMnemonic structure */
   Fill_L6470_DaisyChainMnemonic();
@@ -114,7 +117,6 @@ int main(void)
 }
 
 #ifdef USE_FULL_ASSERT
-
 /**
    * @brief Reports the name of the source file and the source line number
    * where the assert_param error has occurred.
@@ -130,7 +132,6 @@ void assert_failed(uint8_t* file, uint32_t line)
   /* USER CODE END 6 */
 
 }
-
 #endif
 
 /**
