@@ -88,7 +88,14 @@ int main(void)
 
   /* Limit switch initialization */
   LS_Init();
-  
+
+  /* ADC1 initialization */
+  MX_ADC1_Init();
+  ADC_GPIO_Init();
+
+  uint16_t adc_ch0;
+  uint16_t adc_ch8;
+
 #ifdef NUCLEO_USE_USART
   /* Transmit the initial message to the PC via UART */
   USART_TxWelcomeMessage();
@@ -116,7 +123,17 @@ int main(void)
   {
     /* Check if any Application Command for L6470 has been entered by USART */
     USART_CheckAppCmd();
-    // ...
+    // // Poll and read first channel (Rank 1)
+    // if (HAL_ADC_PollForConversion(&hadc1, 100) == HAL_OK) {
+    //   adc_ch0 = HAL_ADC_GetValue(&hadc1);
+    //   USART_Transmit(&huart2, adc_ch0);
+    // }
+
+    // // Poll and read second channel (Rank 2)
+    // if (HAL_ADC_PollForConversion(&hadc1, 100) == HAL_OK) {
+    //   adc_ch8 = HAL_ADC_GetValue(&hadc1);
+    //   USART_Transmit(&huart2, adc_ch0);
+    // }
   }
 #endif
 }
