@@ -35,6 +35,7 @@
 #include "example.h"
 #include "example_usart.h"
 #include "config.h"
+#include "L6470.h"
 
 /**
   * @defgroup   MotionControl
@@ -104,12 +105,7 @@ int main(void)
   
 #if defined (MICROSTEPPING_MOTOR_EXAMPLE)
   /* Perform a batch commands for X-NUCLEO-IHM02A1 */
-  MicrosteppingMotor_Example_01();
-  
-  /* Infinite loop */
-  while (1) {
-    // Write code here
-  };
+  // MicrosteppingMotor_Example_01();
 
 #elif defined (MICROSTEPPING_MOTOR_USART_EXAMPLE)
   /* Fill the L6470_DaisyChainMnemonic structure */
@@ -117,12 +113,18 @@ int main(void)
 	
 	/*Initialize the motor parameters */
 	Motor_Param_Reg_Init();
-  
+#endif
+
   /* Infinite loop */
   while (1)
   {
     /* Check if any Application Command for L6470 has been entered by USART */
-    USART_CheckAppCmd();
+    // USART_CheckAppCmd();
+    
+    // // Run motor
+    // L6470_Run(Y_AXIS_MOTOR_ID, L6470_DIR_FWD_ID, 1000);
+    // L6470_Run(X_AXIS_MOTOR_ID, L6470_DIR_FWD_ID, 1000);
+
     // // Poll and read first channel (Rank 1)
     // if (HAL_ADC_PollForConversion(&hadc1, 100) == HAL_OK) {
     //   adc_ch0 = HAL_ADC_GetValue(&hadc1);
@@ -135,7 +137,6 @@ int main(void)
     //   USART_Transmit(&huart2, adc_ch0);
     // }
   }
-#endif
 }
 
 #ifdef USE_FULL_ASSERT
