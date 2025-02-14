@@ -52,6 +52,5 @@ void ADC_GPIO_Init(void) {
 void L6470_Reverse(uint8_t L6470_Id) {
   // uint32_t speed = L6470_GetParam(L6470_Id, L6470_MAX_SPEED_ID);
   uint8_t x_direction = L6470_CheckStatusRegisterFlag(L6470_Id, DIR_ID);
-  x_direction ^= 1;
-  L6470_Run(L6470_Id, x_direction, CURR_SPEED);
+  L6470_Run(L6470_Id, x_direction ^ 1, CURR_SPEED);
 }
