@@ -286,12 +286,14 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     case GPIO_PIN_6:
     case GPIO_PIN_7:
       // x-axis motor
-      L6470_HardStop(X_AXIS_MOTOR_ID);
+      USART_Transmit(&huart2, "X triggered\n\r");
+      L6470_Reverse(X_AXIS_MOTOR_ID);
       break;
     case GPIO_PIN_8:
     case GPIO_PIN_9:
       // y-axis motor
-      L6470_HardStop(Y_AXIS_MOTOR_ID);
+      USART_Transmit(&huart2, "Y triggered\n\r");
+      L6470_Reverse(Y_AXIS_MOTOR_ID);
       break;
   }
 }

@@ -115,15 +115,19 @@ int main(void)
 	Motor_Param_Reg_Init();
 #endif
 
+  // Run motor
+  L6470_Run(Y_AXIS_MOTOR_ID, L6470_DIR_FWD_ID, CURR_SPEED);
+  L6470_Run(X_AXIS_MOTOR_ID, L6470_DIR_REV_ID, CURR_SPEED);
+
   /* Infinite loop */
   while (1)
   {
     /* Check if any Application Command for L6470 has been entered by USART */
     // USART_CheckAppCmd();
     
-    // // Run motor
-    // L6470_Run(Y_AXIS_MOTOR_ID, L6470_DIR_FWD_ID, 1000);
-    // L6470_Run(X_AXIS_MOTOR_ID, L6470_DIR_FWD_ID, 1000);
+
+    // uint8_t pin_val = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_6);
+    // USART_Transmit(&huart2, num2hex(pin_val, HALFBYTE_F));
 
     // // Poll and read first channel (Rank 1)
     // if (HAL_ADC_PollForConversion(&hadc1, 100) == HAL_OK) {
