@@ -114,10 +114,7 @@ int main(void)
 	/*Initialize the motor parameters */
 	Motor_Param_Reg_Init();
 #endif
-
-  // Run motor
-  L6470_Run(Y_AXIS_MOTOR_ID, L6470_DIR_FWD_ID, CURR_SPEED);
-  L6470_Run(X_AXIS_MOTOR_ID, L6470_DIR_REV_ID, CURR_SPEED);
+  init_motor_states();
 
   /* Infinite loop */
   while (1)
@@ -125,7 +122,6 @@ int main(void)
     /* Check if any Application Command for L6470 has been entered by USART */
     // USART_CheckAppCmd();
     
-
     // uint8_t pin_val = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_6);
     // USART_Transmit(&huart2, num2hex(pin_val, HALFBYTE_F));
 

@@ -284,16 +284,20 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       break;
     // Limit switch cases
     case GPIO_PIN_6:
+      // x-axis motor direction 0 switch
+      process_motor_state(X_AXIS_MOTOR_ID, 0);
+      break;
     case GPIO_PIN_7:
-      // x-axis motor
-      USART_Transmit(&huart2, "X triggered\n\r");
-      L6470_Reverse(X_AXIS_MOTOR_ID);
+      // x-axis motor direction 1 switch
+      process_motor_state(X_AXIS_MOTOR_ID, 1);
       break;
     case GPIO_PIN_8:
+      // y-axis motor direction 0 switch
+      process_motor_state(Y_AXIS_MOTOR_ID, 0);
+      break;
     case GPIO_PIN_9:
-      // y-axis motor
-      USART_Transmit(&huart2, "Y triggered\n\r");
-      L6470_Reverse(Y_AXIS_MOTOR_ID);
+      // y-axis motor direction 1 switch
+      process_motor_state(Y_AXIS_MOTOR_ID, 1);
       break;
   }
 }
