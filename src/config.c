@@ -60,6 +60,9 @@ void L6470_Reverse(uint8_t L6470_Id) {
   L6470_Run(L6470_Id, direction ^ 1, CURR_SPEED);
 }
 
+/**
+ * @brief  Check motor states at program start for validity
+ */
 void init_motor_states(void) {
   x_states[0] = HAL_GPIO_ReadPin(X_AXIS_PORT, X_AXIS_PIN_0);
   x_states[1] = HAL_GPIO_ReadPin(X_AXIS_PORT, X_AXIS_PIN_1);
@@ -80,6 +83,10 @@ void init_motor_states(void) {
     y_direction = 0;
   }
 }
+
+/**
+ * @brief  Process interrupt for change in state of either motor
+ */
 void process_motor_state(uint8_t L6470_Id, int switch_dir) {
   int pin_state = -1;
   if (L6470_Id == X_AXIS_MOTOR_ID) {

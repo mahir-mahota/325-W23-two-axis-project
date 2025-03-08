@@ -91,8 +91,8 @@ int main(void)
   LS_Init();
 
   /* ADC1 initialization */
-  MX_ADC1_Init();
   ADC_GPIO_Init();
+  MX_ADC1_Init();
 
   uint16_t adc_ch0;
   uint16_t adc_ch8;
@@ -115,27 +115,34 @@ int main(void)
 	Motor_Param_Reg_Init();
 #endif
   init_motor_states();
+  ADC_ChannelConfTypeDef sConfig;
+  sConfig.Rank = 1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
 
   /* Infinite loop */
   while (1)
   {
-    /* Check if any Application Command for L6470 has been entered by USART */
-    // USART_CheckAppCmd();
-    
-    // uint8_t pin_val = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_6);
-    // USART_Transmit(&huart2, num2hex(pin_val, HALFBYTE_F));
+    sConfig.Channel = ADC_CHANNEL_0;
+    HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+    HAL_ADC_Start(&hadc1);
+    // Poll and read first channel
+    if (HAL_ADC_PollForConversion(&hadc1, 100) == HAL_OK) {
+      adc_ch0 = HAL_ADC_GetValue(&hadc1);
+      // if (adc_ch0 == 0) {
+      //   USART_Transmit(&huart2, "0");
+      // }
+      // if (adc_ch0 == 4095) {
+      //     USART_Transmit(&huart2, "full");
+      // }
+    }
 
-    // // Poll and read first channel (Rank 1)
-    // if (HAL_ADC_PollForConversion(&hadc1, 100) == HAL_OK) {
-    //   adc_ch0 = HAL_ADC_GetValue(&hadc1);
-    //   USART_Transmit(&huart2, adc_ch0);
-    // }
-
-    // // Poll and read second channel (Rank 2)
-    // if (HAL_ADC_PollForConversion(&hadc1, 100) == HAL_OK) {
-    //   adc_ch8 = HAL_ADC_GetValue(&hadc1);
-    //   USART_Transmit(&huart2, adc_ch0);
-    // }
+    sConfig.Channel = ADC_CHANNEL_8;
+    HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+    HAL_ADC_Start(&hadc1);
+    // Poll and read second channel
+    if (HAL_ADC_PollForConversion(&hadc1, 100) == HAL_OK) {
+      adc_ch8 = HAL_ADC_GetValue(&hadc1);
+    }
   }
 }
 

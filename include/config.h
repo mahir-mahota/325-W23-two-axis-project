@@ -15,11 +15,14 @@
 #define X_AXIS_PORT         GPIOC
 #define X_AXIS_PIN_0        GPIO_PIN_6
 #define X_AXIS_PIN_1        GPIO_PIN_7
+
 #define Y_AXIS_MOTOR_ID     0
 #define X_AXIS_MOTOR_ID     1
+
 #define ADC1_PORT           GPIOA
 #define ADC2_PORT           GPIOB
 #define ADC_PIN             GPIO_PIN_0
+
 #define CURR_SPEED          100000 // Temporary
 
 void LS_Init (void);
