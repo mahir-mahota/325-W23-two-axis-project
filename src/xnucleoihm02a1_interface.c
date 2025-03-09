@@ -412,17 +412,6 @@ void MX_ADC1_Init(void)
   hadc1.Init.DMAContinuousRequests = DISABLE;
   hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
   HAL_ADC_Init(&hadc1);
-
-  /* Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time */
-  // sConfig.Channel = ADC_CHANNEL_0;
-  // sConfig.Rank = 1;
-  // sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
-  // HAL_ADC_ConfigChannel(&hadc1, &sConfig);
-
-  // sConfig.Channel = ADC_CHANNEL_8;
-  // sConfig.Rank = 2;
-  // sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
-  // HAL_ADC_ConfigChannel(&hadc1, &sConfig);
 }
 
 /**

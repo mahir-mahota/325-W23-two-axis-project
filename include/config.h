@@ -23,7 +23,8 @@
 #define ADC2_PORT           GPIOB
 #define ADC_PIN             GPIO_PIN_0
 
-#define CURR_SPEED          100000 // Temporary
+#define MAX_SPEED           100000
+#define MAX_ADC             4095
 
 void LS_Init (void);
 void ADC_GPIO_Init(void);

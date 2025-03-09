@@ -36,6 +36,7 @@
 #include "example_usart.h"
 #include "config.h"
 #include "L6470.h"
+#include <stdio.h>
 
 /**
   * @defgroup   MotionControl
@@ -118,6 +119,7 @@ int main(void)
   ADC_ChannelConfTypeDef sConfig;
   sConfig.Rank = 1;
   sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
+  char buf[64];
 
   /* Infinite loop */
   while (1)
@@ -128,12 +130,8 @@ int main(void)
     // Poll and read first channel
     if (HAL_ADC_PollForConversion(&hadc1, 100) == HAL_OK) {
       adc_ch0 = HAL_ADC_GetValue(&hadc1);
-      // if (adc_ch0 == 0) {
-      //   USART_Transmit(&huart2, "0");
-      // }
-      // if (adc_ch0 == 4095) {
-      //     USART_Transmit(&huart2, "full");
-      // }
+      sprintf(buf, "ADC1: %d ", adc_ch0);
+      HAL_UART_Transmit(&huart2, buf, strlen(buf), HAL_MAX_DELAY);
     }
 
     sConfig.Channel = ADC_CHANNEL_8;
@@ -142,7 +140,11 @@ int main(void)
     // Poll and read second channel
     if (HAL_ADC_PollForConversion(&hadc1, 100) == HAL_OK) {
       adc_ch8 = HAL_ADC_GetValue(&hadc1);
+      sprintf(buf, "ADC2: %d\r\n", adc_ch8);
+      HAL_UART_Transmit(&huart2, buf, strlen(buf), HAL_MAX_DELAY);
     }
+
+    HAL_Delay(200);
   }
 }
 
