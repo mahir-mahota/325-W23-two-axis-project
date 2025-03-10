@@ -57,7 +57,7 @@ void ADC_GPIO_Init(void) {
 void L6470_Reverse(uint8_t L6470_Id) {
   // uint32_t speed = L6470_GetParam(L6470_Id, L6470_MAX_SPEED_ID);
   uint8_t direction = L6470_CheckStatusRegisterFlag(L6470_Id, DIR_ID);
-  L6470_Run(L6470_Id, direction ^ 1, MAX_SPEED);
+  L6470_Run(L6470_Id, direction ^ 1, MAX_MOTOR_SPEED);
 }
 
 /**
@@ -70,16 +70,16 @@ void init_motor_states(void) {
   y_states[1] = HAL_GPIO_ReadPin(Y_AXIS_PORT, Y_AXIS_PIN_1);
 
   if (!x_states[1]) {
-    L6470_Run(X_AXIS_MOTOR_ID, L6470_DIR_FWD_ID, MAX_SPEED);
+    L6470_Run(X_AXIS_MOTOR_ID, L6470_DIR_FWD_ID, MAX_MOTOR_SPEED);
   } else if (!x_states[0]) {
-    L6470_Run(X_AXIS_MOTOR_ID, L6470_DIR_REV_ID, MAX_SPEED);
+    L6470_Run(X_AXIS_MOTOR_ID, L6470_DIR_REV_ID, MAX_MOTOR_SPEED);
     x_direction = 0;
   }
 
   if (!y_states[1]) {
-    L6470_Run(Y_AXIS_MOTOR_ID, L6470_DIR_FWD_ID, MAX_SPEED);
+    L6470_Run(Y_AXIS_MOTOR_ID, L6470_DIR_FWD_ID, MAX_MOTOR_SPEED);
   } else if (!y_states[0]) {
-    L6470_Run(Y_AXIS_MOTOR_ID, L6470_DIR_REV_ID, MAX_SPEED);
+    L6470_Run(Y_AXIS_MOTOR_ID, L6470_DIR_REV_ID, MAX_MOTOR_SPEED);
     y_direction = 0;
   }
 }
@@ -98,7 +98,7 @@ void process_motor_state(uint8_t L6470_Id, int switch_dir) {
     } else if (pin_state && x_states[switch_dir ^ 0x1]) {
       L6470_HardStop(L6470_Id);
     } else if (!pin_state && x_states[switch_dir ^ 0x1]) {
-      L6470_Run(X_AXIS_MOTOR_ID, switch_dir, MAX_SPEED);
+      L6470_Run(X_AXIS_MOTOR_ID, switch_dir, MAX_MOTOR_SPEED);
       x_direction = switch_dir;
     }
   } else if (L6470_Id == Y_AXIS_MOTOR_ID) {
@@ -111,7 +111,7 @@ void process_motor_state(uint8_t L6470_Id, int switch_dir) {
     } else if (pin_state && y_states[switch_dir ^ 0x1]) {
       L6470_HardStop(L6470_Id);
     } else if (!pin_state && y_states[switch_dir ^ 0x1]) {
-      L6470_Run(Y_AXIS_MOTOR_ID, switch_dir, MAX_SPEED);
+      L6470_Run(Y_AXIS_MOTOR_ID, switch_dir, MAX_MOTOR_SPEED);
       y_direction = switch_dir;
     }
   }
