@@ -23,7 +23,8 @@
 #define ADC2_PORT           GPIOB
 #define ADC_PIN             GPIO_PIN_0
 
-#define MAX_MOTOR_SPEED     100000
+#define MAX_X_MOTOR_SPEED   10000
+#define MAX_Y_MOTOR_SPEED   30000
 #define MAX_ADC             4095
 
 void LS_Init (void);
@@ -31,3 +32,4 @@ void ADC_GPIO_Init(void);
 void L6470_Reverse(uint8_t L6470_Id);
 void init_motor_states(void);
 void process_motor_state(uint8_t L6470_Id, int switch_dir);
+void set_motor_speed(uint8_t L6470_Id, int adc_value);

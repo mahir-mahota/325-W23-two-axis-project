@@ -132,6 +132,7 @@ int main(void)
       adc_ch0 = HAL_ADC_GetValue(&hadc1);
       sprintf(buf, "ADC1: %d ", adc_ch0);
       HAL_UART_Transmit(&huart2, buf, strlen(buf), HAL_MAX_DELAY);
+      set_motor_speed(X_AXIS_MOTOR_ID, adc_ch0);
     }
 
     sConfig.Channel = ADC_CHANNEL_8;
@@ -140,8 +141,9 @@ int main(void)
     // Poll and read second channel
     if (HAL_ADC_PollForConversion(&hadc1, 100) == HAL_OK) {
       adc_ch8 = HAL_ADC_GetValue(&hadc1);
-      sprintf(buf, "ADC2: %d\r\n", adc_ch8);
+      sprintf(buf, "ADC2: %d \r\n", adc_ch8);
       HAL_UART_Transmit(&huart2, buf, strlen(buf), HAL_MAX_DELAY);
+      set_motor_speed(Y_AXIS_MOTOR_ID, adc_ch8);
     }
 
     HAL_Delay(200);
