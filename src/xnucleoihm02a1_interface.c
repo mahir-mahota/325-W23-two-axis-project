@@ -399,28 +399,19 @@ void MX_ADC1_Init(void)
   /* GPIO Ports Clock Enable */
   __GPIOB_CLK_ENABLE();
 
-    /**Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion) 
-    */
- // hadc1.Instance = ADC1;
- // hadc1.Init.ClockPrescaler = ;
- // hadc1.Init.Resolution = ;
- // hadc1.Init.ScanConvMode = ;
- // hadc1.Init.ContinuousConvMode = ;
- // hadc1.Init.DiscontinuousConvMode = ;
- // hadc1.Init.ExternalTrigConvEdge = ;
- // hadc1.Init.DataAlign = ;
- // hadc1.Init.NbrOfConversion = ;
- // hadc1.Init.DMAContinuousRequests = ;
- // hadc1.Init.EOCSelection = ;
+  /* Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion) */
+  hadc1.Instance = ADC1;
+  hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4; // Max system clock is 82 and max ADC spec is 36
+  hadc1.Init.Resolution = ADC_RESOLUTION_8B; // Reduces noise compared to 12 bit while still giving enough granularity
+  hadc1.Init.ScanConvMode = DISABLE; // Not using multiple channels
+  hadc1.Init.ContinuousConvMode = DISABLE; // Not using multiple channels
+  hadc1.Init.DiscontinuousConvMode = DISABLE; // Not using multiple channels
+  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE; // Don't need external trigger
+  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT; // Normal alignment for 0-255
+  hadc1.Init.NbrOfConversion = 1; // Converting one channel at a time
+  hadc1.Init.DMAContinuousRequests = DISABLE; // Not using DMA
+  hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV; // Not using interrupts so single conversion flag is fine
   HAL_ADC_Init(&hadc1);
-
-    /**Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time. 
-    */
-  sConfig.Channel = ADC_CHANNEL_8;
-  sConfig.Rank = 1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
-  HAL_ADC_ConfigChannel(&hadc1, &sConfig);
-
 }
 
 /**

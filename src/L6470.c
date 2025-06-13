@@ -1111,7 +1111,7 @@ uint16_t L6470_GetStatus(uint8_t L6470_Id)
   * @param  Value         The new value.
   *
   * @note   This function will properly fill the right column of the L6470_AppCmdPkg.
-  * @note   The commad will be sent by @ref L6470_PerformPreparedApplicationCommand.
+  * @note   The command will be sent by @ref L6470_PerformPreparedApplicationCommand.
   */
 void L6470_PrepareSetParam(uint8_t L6470_Id, eL6470_RegId_t L6470_RegId, uint32_t Value)
 {
@@ -1127,7 +1127,7 @@ void L6470_PrepareSetParam(uint8_t L6470_Id, eL6470_RegId_t L6470_RegId, uint32_
   * @retval ReceivedValue The register value.
   *
   * @note   This function will properly fill the right column of the L6470_AppCmdPkg.
-  * @note   The commad will be sent by @ref L6470_PerformPreparedApplicationCommand.
+  * @note   The command will be sent by @ref L6470_PerformPreparedApplicationCommand.
   */
 void L6470_PrepareGetParam(uint8_t L6470_Id, eL6470_RegId_t L6470_RegId)
 {
@@ -1142,7 +1142,7 @@ void L6470_PrepareGetParam(uint8_t L6470_Id, eL6470_RegId_t L6470_RegId)
   * @param  Speed         The speed value as (([step/s] * 250e-9) / 2^-28)
   *
   * @note   This function will properly fill the right column of the L6470_AppCmdPkg.
-  * @note   The commad will be sent by @ref L6470_PerformPreparedApplicationCommand.
+  * @note   The command will be sent by @ref L6470_PerformPreparedApplicationCommand.
   */
 void L6470_PrepareRun(uint8_t L6470_Id, eL6470_DirId_t L6470_DirId, uint32_t Speed)
 {
@@ -1156,7 +1156,7 @@ void L6470_PrepareRun(uint8_t L6470_Id, eL6470_DirId_t L6470_DirId, uint32_t Spe
   * @param  L6470_DirId   The identifier of the L6470 motion direction.
   *
   * @note   This function will properly fill the right column of the L6470_AppCmdPkg.
-  * @note   The commad will be sent by @ref L6470_PerformPreparedApplicationCommand.
+  * @note   The command will be sent by @ref L6470_PerformPreparedApplicationCommand.
   */
 void L6470_PrepareStepClock(uint8_t L6470_Id, eL6470_DirId_t L6470_DirId)
 {
@@ -1171,7 +1171,7 @@ void L6470_PrepareStepClock(uint8_t L6470_Id, eL6470_DirId_t L6470_DirId)
   * @param  N_Step        The number of microsteps.
   *
   * @note   This function will properly fill the right column of the L6470_AppCmdPkg.
-  * @note   The commad will be sent by @ref L6470_PerformPreparedApplicationCommand.
+  * @note   The command will be sent by @ref L6470_PerformPreparedApplicationCommand.
   */
 void L6470_PrepareMove(uint8_t L6470_Id, eL6470_DirId_t L6470_DirId, uint32_t N_Step)
 {
@@ -1185,7 +1185,7 @@ void L6470_PrepareMove(uint8_t L6470_Id, eL6470_DirId_t L6470_DirId, uint32_t N_
   * @param  AbsPos        The target absolute position.
   *
   * @note   This function will properly fill the right column of the L6470_AppCmdPkg.
-  * @note   The commad will be sent by @ref L6470_PerformPreparedApplicationCommand.
+  * @note   The command will be sent by @ref L6470_PerformPreparedApplicationCommand.
   */
 void L6470_PrepareGoTo(uint8_t L6470_Id, uint32_t AbsPos)
 {
@@ -1200,7 +1200,7 @@ void L6470_PrepareGoTo(uint8_t L6470_Id, uint32_t AbsPos)
   * @param  AbsPos        The target absolute position.
   *
   * @note   This function will properly fill the right column of the L6470_AppCmdPkg.
-  * @note   The commad will be sent by @ref L6470_PerformPreparedApplicationCommand.
+  * @note   The command will be sent by @ref L6470_PerformPreparedApplicationCommand.
   */
 void L6470_PrepareGoToDir(uint8_t L6470_Id, eL6470_DirId_t L6470_DirId, uint32_t AbsPos)
 {
@@ -1216,7 +1216,7 @@ void L6470_PrepareGoToDir(uint8_t L6470_Id, eL6470_DirId_t L6470_DirId, uint32_t
   * @param  Speed         The speed value as (([step/s] * 250e-9) / 2^-28)
   *
   * @note   This function will properly fill the right column of the L6470_AppCmdPkg.
-  * @note   The commad will be sent by @ref L6470_PerformPreparedApplicationCommand.
+  * @note   The command will be sent by @ref L6470_PerformPreparedApplicationCommand.
   */
 void L6470_PrepareGoUntil(uint8_t L6470_Id, eL6470_ActId_t L6470_ActId, eL6470_DirId_t L6470_DirId, uint32_t Speed)
 {
@@ -1231,7 +1231,7 @@ void L6470_PrepareGoUntil(uint8_t L6470_Id, eL6470_ActId_t L6470_ActId, eL6470_D
   * @param  L6470_DirId   The identifier of the L6470 motion direction.
   *
   * @note   This function will properly fill the right column of the L6470_AppCmdPkg.
-  * @note   The commad will be sent by @ref L6470_PerformPreparedApplicationCommand.
+  * @note   The command will be sent by @ref L6470_PerformPreparedApplicationCommand.
   */
 void L6470_PrepareReleaseSW(uint8_t L6470_Id, eL6470_ActId_t L6470_ActId, eL6470_DirId_t L6470_DirId)
 {
@@ -1244,7 +1244,7 @@ void L6470_PrepareReleaseSW(uint8_t L6470_Id, eL6470_ActId_t L6470_ActId, eL6470
   * @param  L6470_Id      The identifier of the L6470 target inside the daisy chain.
   *
   * @note   This function will properly fill the right column of the L6470_AppCmdPkg.
-  * @note   The commad will be sent by @ref L6470_PerformPreparedApplicationCommand.
+  * @note   The command will be sent by @ref L6470_PerformPreparedApplicationCommand.
   */
 void L6470_PrepareGoHome(uint8_t L6470_Id)
 {
@@ -1257,7 +1257,7 @@ void L6470_PrepareGoHome(uint8_t L6470_Id)
   * @param  L6470_Id      The identifier of the L6470 target inside the daisy chain.
   *
   * @note   This function will properly fill the right column of the L6470_AppCmdPkg.
-  * @note   The commad will be sent by @ref L6470_PerformPreparedApplicationCommand.
+  * @note   The command will be sent by @ref L6470_PerformPreparedApplicationCommand.
   */
 void L6470_PrepareGoMark(uint8_t L6470_Id)
 {
@@ -1270,7 +1270,7 @@ void L6470_PrepareGoMark(uint8_t L6470_Id)
   * @param  L6470_Id      The identifier of the L6470 target inside the daisy chain.
   *
   * @note   This function will properly fill the right column of the L6470_AppCmdPkg.
-  * @note   The commad will be sent by @ref L6470_PerformPreparedApplicationCommand.
+  * @note   The command will be sent by @ref L6470_PerformPreparedApplicationCommand.
   */
 void L6470_PrepareResetPos(uint8_t L6470_Id)
 {
@@ -1283,7 +1283,7 @@ void L6470_PrepareResetPos(uint8_t L6470_Id)
   * @param  L6470_Id      The identifier of the L6470 target inside the daisy chain.
   *
   * @note   This function will properly fill the right column of the L6470_AppCmdPkg.
-  * @note   The commad will be sent by @ref L6470_PerformPreparedApplicationCommand.
+  * @note   The command will be sent by @ref L6470_PerformPreparedApplicationCommand.
   */
 void L6470_PrepareResetDevice(uint8_t L6470_Id)
 {
@@ -1296,7 +1296,7 @@ void L6470_PrepareResetDevice(uint8_t L6470_Id)
   * @param  L6470_Id      The identifier of the L6470 target inside the daisy chain.
   *
   * @note   This function will properly fill the right column of the L6470_AppCmdPkg.
-  * @note   The commad will be sent by @ref L6470_PerformPreparedApplicationCommand.
+  * @note   The command will be sent by @ref L6470_PerformPreparedApplicationCommand.
   */
 void L6470_PrepareSoftStop(uint8_t L6470_Id)
 {
@@ -1309,7 +1309,7 @@ void L6470_PrepareSoftStop(uint8_t L6470_Id)
   * @param  L6470_Id      The identifier of the L6470 target inside the daisy chain.
   *
   * @note   This function will properly fill the right column of the L6470_AppCmdPkg.
-  * @note   The commad will be sent by @ref L6470_PerformPreparedApplicationCommand.
+  * @note   The command will be sent by @ref L6470_PerformPreparedApplicationCommand.
   */
 void L6470_PrepareHardStop(uint8_t L6470_Id)
 {
@@ -1322,7 +1322,7 @@ void L6470_PrepareHardStop(uint8_t L6470_Id)
   * @param  L6470_Id      The identifier of the L6470 target inside the daisy chain.
   *
   * @note   This function will properly fill the right column of the L6470_AppCmdPkg.
-  * @note   The commad will be sent by @ref L6470_PerformPreparedApplicationCommand.
+  * @note   The command will be sent by @ref L6470_PerformPreparedApplicationCommand.
   */
 void L6470_PrepareSoftHiZ(uint8_t L6470_Id)
 {
@@ -1335,7 +1335,7 @@ void L6470_PrepareSoftHiZ(uint8_t L6470_Id)
   * @param  L6470_Id      The identifier of the L6470 target inside the daisy chain.
   *
   * @note   This function will properly fill the right column of the L6470_AppCmdPkg.
-  * @note   The commad will be sent by @ref L6470_PerformPreparedApplicationCommand.
+  * @note   The command will be sent by @ref L6470_PerformPreparedApplicationCommand.
   */
 void L6470_PrepareHardHiZ(uint8_t L6470_Id)
 {
@@ -1348,7 +1348,7 @@ void L6470_PrepareHardHiZ(uint8_t L6470_Id)
   * @param  L6470_Id      The identifier of the L6470 target inside the daisy chain.
   *
   * @note   This function will properly fill the right column of the L6470_AppCmdPkg.
-  * @note   The commad will be sent by @ref L6470_PerformPreparedApplicationCommand.
+  * @note   The command will be sent by @ref L6470_PerformPreparedApplicationCommand.
   */
 void L6470_PrepareGetStatus(uint8_t L6470_Id)
 {
